@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun toBoolean(valor : Int) : Boolean{
+        //David editó esta línea.
         if(valor==1){
             return true
         }
