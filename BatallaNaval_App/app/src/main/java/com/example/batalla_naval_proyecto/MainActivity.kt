@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun cargarTablero() {
         CoroutineScope(Dispatchers.IO).launch {
-
             var fila: Int = 0
             val call = met.getRetrofit().create(APIService::class.java).getTablero("").execute()
             val tablero = call.body() as tableroResponse
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity() {
             for(i in tablero.array){
                 println("Fila $fila col1 ${i.col1} col2 ${i.col2}")
                 var filaLista : ArrayList<Boolean> = ArrayList()
-
                 filaLista.add( toBoolean(i.col1))
                 filaLista.add(toBoolean(i.col2))
                 filaLista.add(toBoolean(i.col3))

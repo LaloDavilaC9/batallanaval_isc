@@ -6,19 +6,32 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class Ingame_boards : AppCompatActivity() {
+    private  val met = Metodos()
     private var misCeldas = arrayOf<Array<TextView>>()
     private var celdasEnemigas = arrayOf<Array<TextView>>()
 
-    private var celdasAtaque: Array<BooleanArray> = Array(10){BooleanArray(10)} //Recuperar celdas enemigas desde la API.
+    //Es la que obtiene al tablero amigo, es decir de este jugador
+    var matrizAmiga : ArrayList<ArrayList<Boolean>> = ArrayList()
+
+    //Es la que obtiene al tablero enemigo, es decir de este jugador
+    var matrizEnemiga : ArrayList<ArrayList<Boolean>> = ArrayList()
 
     private var esMiTurno:Boolean = false //Variable usada para pasar la bandera de quién ataca
+
+    private var numJugador: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingame_boards)
+        numJugador = 1
         inicializarCeldas()
+        //Recibimos tablero enemigo
         recibirTablero()
         // esMiTurno = false;
     }
@@ -26,12 +39,26 @@ class Ingame_boards : AppCompatActivity() {
     public fun atacarCelda(coord: PointF){
         //Funcion a implementar con API
         if(!esMiTurno) return //Talvez mostrar el tiempo restante del enemigo en pantalla
+
         //Desactivar la celda atacada. (not clickable)
+
+        //
     }
 
     public fun actualizarMiTablero(celda: PointF, nuevoColor: Color){
         //Funcion a implementar con API
+        CoroutineScope(Dispatchers.IO).launch {
+            var numeroTablero: Int = numJugador
+            val call = met.getRetrofit().create(APIService::class.java)
+                .getTablero("/tablero/${numeroTablero}/").execute()
+            //Tenemos ya el tablero
+            val tablero = call.body() as tableroResponse
+            //Lo guardamos en un arraylist de tipo booleano
+            matrizAmiga = convertirTablero(tablero)
+        }
     }
+
+
 
     public fun actualizarMiMarcador(fallos:Int, aciertos:Int){
 
@@ -43,13 +70,80 @@ class Ingame_boards : AppCompatActivity() {
 
     public fun actualizarTableroAtaque(celda: PointF, nuevoColor: Color){
         //Funcion a implementar con API
+        CoroutineScope(Dispatchers.IO).launch {
+            var fila: Int = 0
+            var numeroTablero: Int
+            if(numJugador == 1)
+                numeroTablero = 2
+            else
+                numeroTablero = 1
+
+            val call = met.getRetrofit().create(APIService::class.java)
+                .getTablero("/tablero/${numeroTablero}/").execute()
+
+            //Tenemos ya el tablero
+            val tablero = call.body() as tableroResponse
+            //Lo guardamos en un arraylist de tipo booleano
+            matrizEnemiga = convertirTablero(tablero)
+        }
+
     }
 
     public fun getMiTurno():Boolean{return esMiTurno}
 
     public fun recibirTablero(){
         //Recibir el tablero enemigo desde la API.
+
+        CoroutineScope(Dispatchers.IO).launch {
+            var fila: Int = 0
+            var numeroTablero: Int
+            if(numJugador == 1)
+                numeroTablero = 2
+            else
+                numeroTablero = 1
+
+            val call = met.getRetrofit().create(APIService::class.java)
+                .getTablero("/tablero/${numeroTablero}/").execute()
+
+            //Tenemos ya el tablero
+            val tablero = call.body() as tableroResponse
+            //Lo guardamos en un arraylist de tipo booleano
+            matrizEnemiga = convertirTablero(tablero)
+        }
     }
+
+    private fun convertirTablero(tablero : tableroResponse) : ArrayList<ArrayList<Boolean>> {
+        var matriz : ArrayList<ArrayList<Boolean>> = ArrayList()
+
+        //println("El tablero es: "+tablero)
+        for(i in tablero.array){
+            //println("Fila $fila col1 ${i.col1} col2 ${i.col2}")
+            var filaLista : ArrayList<Boolean> = ArrayList()
+            filaLista.add( toBoolean(i.col1))
+            filaLista.add(toBoolean(i.col2))
+            filaLista.add(toBoolean(i.col3))
+            filaLista.add(toBoolean(i.col4))
+            filaLista.add(toBoolean(i.col5))
+            filaLista.add(toBoolean(i.col6))
+            filaLista.add(toBoolean(i.col7))
+            filaLista.add(toBoolean(i.col8))
+            filaLista.add(toBoolean(i.col9))
+            filaLista.add(toBoolean(i.col10))
+            matriz.add(filaLista)
+            //fila = fila+1;
+        }
+        /*println("Matriz: "+matriz)
+        println("Comienza el ciclo  Tamaño filas= ${matriz.size}")
+        println("Comienza el ciclo  Tamaño columnas = ${matriz[0].size}")
+        for(  i in 0 until matriz.size){
+            for( j in 0 until 10){
+                print("${matriz[i][j]} ")
+            }
+            println()
+        }*/
+        return matriz
+    }
+
 
     private fun inicializarCeldas(){
         var miCeldaA1 = findViewById(R.id.bttnCelda_A_1) as TextView
@@ -317,5 +411,14 @@ class Ingame_boards : AppCompatActivity() {
                 celdasEnemigas[i][j].setOnClickListener(handler)
             }
         }
+    }
+
+
+    fun toBoolean(valor : Int) : Boolean{
+        //David editó esta línea.
+        if(valor==1){
+            return true
+        }
+        return false
     }
 }
