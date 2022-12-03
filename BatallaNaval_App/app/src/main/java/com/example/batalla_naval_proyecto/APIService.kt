@@ -10,11 +10,14 @@ import retrofit2.http.POST
 import retrofit2.http.Url
 
 interface APIService {
-    @GET
-    suspend fun getTablero(@Url url:String) : Call<posicionResponse>
+   /* @GET
+    suspend fun getTablero(@Url url:String) : Call<posicionResponse>*/
 
     @GET
     suspend fun preguntarPosicion(@Url url:String) : Response<posicionResponse>
+
+    @GET
+    suspend fun preguntarCerteza(@Url url:String) : Response<certezaResponse>
 
     @POST("/atacarCelda")
     suspend fun atacar(@Body requestBody: RequestBody) : Response<ResponseBody>

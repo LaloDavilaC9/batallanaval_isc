@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
     private fun cargarTablero() {
         CoroutineScope(Dispatchers.IO).launch {
             var fila: Int = 0
-            val call = met.getRetrofit().create(APIService::class.java).getTablero("").execute()
-            val tablero = call.body() as posicionResponse
+            //val call = met.getRetrofit().create(APIService::class.java).getTablero("").execute()
+            //val tablero = call.body() as posicionResponse
             //println("El tablero es: "+tablero)
             /*for(i in tablero.array){
                 println("Fila $fila col1 ${i.col1} col2 ${i.col2}")

@@ -1,21 +1,5 @@
 module.exports = {
-  create: (connection, body, callback) => {
-    connection.query("insert into users SET ?", body, (err, results) => {
-      if (err) {
-        callback({
-          array: null,
-          id: null,
-          success: false,
-          err: JSON.stringify(err),
-        });
-        return;
-      }
-      callback({ array: null, id: null, success: true });
-    });
-  },
-
-
-
+ 
   getTablero: (connection, req,callback) => {
     const info = req.params;
     //console.log("INFO: "+info.numero);
@@ -108,7 +92,7 @@ module.exports = {
     //console.log("INFO: "+info.numero);
     //var tablero = info.numero == 1 ? "tablero1" : "tablero2"; 
     //"select * from "+tablero
-    var query= "SELECT MAX(numero_jugada) as numero_jugada,jugada.turno_jugada, jugada.pos_x,jugada.pos_y FROM jugada";
+    var query= "SELECT * FROM ataques order by no_jugada desc limit 1;";
     
     connection.query(query, (err, results) => {
       if (err) {

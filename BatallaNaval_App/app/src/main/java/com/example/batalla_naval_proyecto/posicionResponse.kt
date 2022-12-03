@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName
 
 data class tableroResponse (@SerializedName("array") var array:List<objeto>, @SerializedName("success") var success: String)*/
 
-data class objeto(
+data class posicionObject(
 
     var numero_jugada : Int,
     var turno_jugada : Int,
@@ -26,5 +26,14 @@ data class objeto(
     var pos_y : Int
 )
 
+data class certezaObject(
+    var indice : Int,
+    var no_jugada : Int,
+    var ataqueCertero : Int
+)
 
-data class posicionResponse (@SerializedName("array") var array:List<objeto>, @SerializedName("success") var success: String)
+
+data class posicionResponse (@SerializedName("array") var array:List<posicionObject>, @SerializedName("success") var success: String)
+
+data class certezaResponse (@SerializedName("array") var array:List<certezaObject>, @SerializedName("success") var success: String)
+

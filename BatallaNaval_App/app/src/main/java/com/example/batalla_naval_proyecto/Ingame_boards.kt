@@ -22,24 +22,24 @@ import retrofit2.Retrofit
 class Ingame_boards : AppCompatActivity() {
     private val met = Metodos()
 
-    //Es la que obtiene al tablero amigo, es decir de este jugador
-    var matrizAmiga: ArrayList<ArrayList<Boolean>> = ArrayList()
+
     private var misCeldas = arrayOf<Array<TextView>>()
     private var celdasEnemigas = arrayOf<Array<TextView>>()
 
     //Esta variable almacena el turno que tiene el jugador. Si él crea la partida, tiene el turno 1, de lo contrario el 2
     private var turnoJugador = 1
-    private var numJugador: Int = 0
 
-    private var numeroJugada: Int = 3
+    //Esta variable almacena  el número de jugada actual
+    private var numeroJugada: Int = 1
+
+    //Esta variable almacena el número de turno actual
     private var turnoJugada: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingame_boards)
-        numJugador = 1
         inicializarCeldas()
-        esperarAtaque()
+        //esperarAtaque()
 
         //Recibimos tablero enemigo
         // recibirTablero()
@@ -78,11 +78,34 @@ class Ingame_boards : AppCompatActivity() {
                         val gson = GsonBuilder().setPrettyPrinting().create()
                         val prettyJson = gson.toJson(
                             JsonParser.parseString(
-                                response.body()
-                                    ?.string() // About this thread blocking annotation : https://github.com/square/retrofit/issues/3255
+                                response.body()?.string()
                             )
                         )
                         Log.d("Pretty Printed JSON :", prettyJson)
+
+                        //Una vez atacada la celda, debemos de esperar a que el otro jugador nos responda si el atacque fue o no certero
+                        var numeroJugadaNueva = -1
+                        println("numeroJugadaNueva = ${numeroJugadaNueva} vs numeroJugada = ${numeroJugada}")
+                        var acierto = -1 //0. NO  ACERTÓ     1. SI ACERTÓ
+                        CoroutineScope(Dispatchers.IO).launch {
+                            //withContext(Dispatchers.Main) {
+                            //Si este While se cumple, significa que aún no se dicta la definición, por lo tanto debe de seguir preguntando
+                            while (numeroJugadaNueva != numeroJugada) {
+                                println("ESPERANDO DEFINICIÓN ")
+                                val call: Response<certezaResponse> = met.getRetrofit().create(APIService::class.java).preguntarCerteza("/preguntarCerteza")
+                                val definicion = call.body() as certezaResponse
+
+                                numeroJugadaNueva = definicion.array[0].no_jugada
+                                acierto = definicion.array[0].ataqueCertero
+                                println("numeroJugadaNueva = ${numeroJugadaNueva} vs numeroJugada = ${numeroJugada}")
+                                Thread.sleep(2000)
+                            }
+
+                            println("TERMINÓ DE ESPERAR DEFINICION  RESULTADO = ${acierto}")
+
+
+                            //Aquí se programa qué pasa cuando se acierta el ataque al enemigo
+                        }
 
                     } else {
                         //Log.e("RETROFIT_ERROR", response.code().toString())
@@ -103,9 +126,7 @@ class Ingame_boards : AppCompatActivity() {
 
             while (turnoNuevo == turnoJugada) {
                 println("ESPERANDO ATAQUE")
-                val call: Response<posicionResponse> =
-                    met.getRetrofit().create(APIService::class.java)
-                        .preguntarPosicion("/preguntarPosicion")
+                val call: Response<posicionResponse> = met.getRetrofit().create(APIService::class.java).preguntarPosicion("/preguntarPosicion")
                 val posicionAtacada = call.body() as posicionResponse
                 turnoNuevo = posicionAtacada.array[0].turno_jugada
                 pos_x = posicionAtacada.array[0].pos_x
@@ -120,6 +141,7 @@ class Ingame_boards : AppCompatActivity() {
 
             println("SALIÓOO")
             //Aquí se verifica si la posición que atacó el rival ha sido acertada o no
+
 
             var ataque = 0  //0: NO FUE ATACADO    1. SI FUE ATACADO
 

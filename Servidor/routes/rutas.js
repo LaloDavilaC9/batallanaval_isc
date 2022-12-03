@@ -21,6 +21,13 @@ router.get("/preguntarPosicion", [], (req, res) => {
   });
 });
 
+//Pregunta si el ataque fue certero o no   0: NO   1. SI
+router.get("/preguntarCerteza", [], (req, res) => {
+  info.getDefinicion(connection,req, (data) => {
+    res.json(data);
+  });
+});
+
 
 //Se manda llamar cuando un jugador ataca al otro
 router.post(
