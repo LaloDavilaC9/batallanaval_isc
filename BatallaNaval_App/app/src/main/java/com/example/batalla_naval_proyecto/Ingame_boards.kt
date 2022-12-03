@@ -23,14 +23,16 @@ class Ingame_boards : AppCompatActivity() {
     private val met = Metodos()
 
     //Es la que obtiene al tablero amigo, es decir de este jugador
-    var matrizAmiga : ArrayList<ArrayList<Boolean>> = ArrayList()
+    var matrizAmiga: ArrayList<ArrayList<Boolean>> = ArrayList()
     private var misCeldas = arrayOf<Array<TextView>>()
     private var celdasEnemigas = arrayOf<Array<TextView>>()
-    private var esMiTurno:Boolean = false //Variable usada para pasar la bandera de quién ataca
-    private var numJugador: Int = 0
-    private var numeroJugada : Int =  3
-    private var turnoJugada : Int = 2
 
+    //Esta variable almacena el turno que tiene el jugador. Si él crea la partida, tiene el turno 1, de lo contrario el 2
+    private var turnoJugador = 1
+    private var numJugador: Int = 0
+
+    private var numeroJugada: Int = 3
+    private var turnoJugada: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,77 +42,123 @@ class Ingame_boards : AppCompatActivity() {
         esperarAtaque()
 
         //Recibimos tablero enemigo
-       // recibirTablero()
+        // recibirTablero()
         // esMiTurno = false;
     }
 
 
-    fun atacarCelda(coord: PointF){
+    fun atacarCelda(coord: PointF) {
 
-        //coord.x = 4f
-        //coord.y = 5f
-
-
-        val jsonObject = JSONObject()
-        jsonObject.put("numero_jugada", this.numeroJugada)
-        jsonObject.put("turno_jugada", this.turnoJugada)
-        jsonObject.put("pos_x", coord.x)
-        jsonObject.put("pos_y", coord.y)
+        //SIGNIFICA QUE ES TU TURNO
+        if (this.turnoJugada == this.turnoJugador) {
+            val jsonObject = JSONObject()
+            jsonObject.put("numero_jugada", this.numeroJugada)
+            jsonObject.put("turno_jugada", this.turnoJugada)
+            jsonObject.put("pos_x", coord.x)
+            jsonObject.put("pos_y", coord.y)
 
 
-        //Se convierte el objeto Json a String
-        var jsonString = jsonObject.toString()
+            //Se convierte el objeto Json a String
+            var jsonString = jsonObject.toString()
 
-        val requestBody = jsonString.toRequestBody("application/json".toMediaTypeOrNull())
-        val retrofit = met.getRetrofit()
+            val requestBody = jsonString.toRequestBody("application/json".toMediaTypeOrNull())
+            val retrofit = met.getRetrofit()
 
 
-        val service = retrofit.create(APIService::class.java)
+            val service = retrofit.create(APIService::class.java)
 
-        //Mandamos llamar a atacar la celda, con el JSON que se generó arriba
-        CoroutineScope(Dispatchers.IO).launch {
+            //Mandamos llamar a atacar la celda, con el JSON que se generó arriba
+            CoroutineScope(Dispatchers.IO).launch {
 
-            val response = service.atacar(requestBody)
-            withContext(Dispatchers.Main) {
-                //El siguiente IF controla si se pudo conectar a la API o no
-                if (response.isSuccessful) {
-                    // Convert raw JSON to pretty JSON using GSON library
-                    val gson = GsonBuilder().setPrettyPrinting().create()
-                    val prettyJson = gson.toJson(
-                        JsonParser.parseString(
-                            response.body()?.string() // About this thread blocking annotation : https://github.com/square/retrofit/issues/3255
+                val response = service.atacar(requestBody)
+                withContext(Dispatchers.Main) {
+                    //El siguiente IF controla si se pudo conectar a la API o no
+                    if (response.isSuccessful) {
+                        // Convert raw JSON to pretty JSON using GSON library
+                        val gson = GsonBuilder().setPrettyPrinting().create()
+                        val prettyJson = gson.toJson(
+                            JsonParser.parseString(
+                                response.body()
+                                    ?.string() // About this thread blocking annotation : https://github.com/square/retrofit/issues/3255
+                            )
                         )
-                    )
-                    Log.d("Pretty Printed JSON :", prettyJson)
+                        Log.d("Pretty Printed JSON :", prettyJson)
 
-                } else {
-                    //Log.e("RETROFIT_ERROR", response.code().toString())
+                    } else {
+                        //Log.e("RETROFIT_ERROR", response.code().toString())
+                    }
                 }
             }
         }
+
     }
 
 
-    fun esperarAtaque(){
+    fun esperarAtaque() {
         var turnoNuevo = this.turnoJugada
-
+        var pos_x: Int = -1
+        var pos_y: Int = -1
         CoroutineScope(Dispatchers.IO).launch {
             //withContext(Dispatchers.Main) {
 
-                while(turnoNuevo == turnoJugada) {
-                    println("ESPERANDO ATAQUE")
+            while (turnoNuevo == turnoJugada) {
+                println("ESPERANDO ATAQUE")
+                val call: Response<posicionResponse> =
+                    met.getRetrofit().create(APIService::class.java)
+                        .preguntarPosicion("/preguntarPosicion")
+                val posicionAtacada = call.body() as posicionResponse
+                turnoNuevo = posicionAtacada.array[0].turno_jugada
+                pos_x = posicionAtacada.array[0].pos_x
+                pos_y = posicionAtacada.array[0].pos_y
+                numeroJugada = posicionAtacada.array[0].numero_jugada
 
-                    val call : Response<posicionResponse> = met.getRetrofit().create(APIService::class.java).preguntarPosicion("/preguntarPosicion")
-                    val posicionAtacada = call.body() as posicionResponse
-                    turnoNuevo = posicionAtacada.array[0].turno_jugada
-                    println("turnoNuevo = ${turnoNuevo} vs turnoJugada = ${turnoJugada}")
-                    Thread.sleep(2000)
+                    //println("turnoNuevo = ${turnoNuevo} vs turnoJugada = ${turnoJugada}")
+                Thread.sleep(2000)
+            }
+            //Cambió el turno
+            turnoJugada = turnoNuevo;
+
+            println("SALIÓOO")
+            //Aquí se verifica si la posición que atacó el rival ha sido acertada o no
+
+            var ataque = 0  //0: NO FUE ATACADO    1. SI FUE ATACADO
+
+
+            val jsonObject = JSONObject()
+            jsonObject.put("no_jugada", numeroJugada)
+            jsonObject.put("ataqueCertero", ataque)
+            //Se convierte el objeto Json a String
+            var jsonString = jsonObject.toString()
+
+            val requestBody = jsonString.toRequestBody("application/json".toMediaTypeOrNull())
+            val retrofit = met.getRetrofit()
+
+
+            val service = retrofit.create(APIService::class.java)
+
+            //Mandamos al enemigo nuestra respuesta de si fuimos atacados o no
+            CoroutineScope(Dispatchers.IO).launch {
+
+                val response = service.definicion(requestBody)
+                withContext(Dispatchers.Main) {
+                    //El siguiente IF controla si se pudo conectar a la API o no
+                    if (response.isSuccessful) {
+                        // Convert raw JSON to pretty JSON using GSON library
+                        val gson = GsonBuilder().setPrettyPrinting().create()
+                        val prettyJson = gson.toJson(
+                            JsonParser.parseString(
+                                response.body()
+                                    ?.string() // About this thread blocking annotation : https://github.com/square/retrofit/issues/3255
+                            )
+                        )
+                        Log.d("Pretty Printed JSON :", prettyJson)
+
+                    } else {
+                        //Log.e("RETROFIT_ERROR", response.code().toString())
+                    }
                 }
-                turnoJugada = turnoNuevo;
-                println("SALIÓOO")
-            //}
+            }
         }
-
     }
 
 

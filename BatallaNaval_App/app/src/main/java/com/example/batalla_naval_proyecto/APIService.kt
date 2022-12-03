@@ -19,4 +19,7 @@ interface APIService {
     @POST("/atacarCelda")
     suspend fun atacar(@Body requestBody: RequestBody) : Response<ResponseBody>
 
+    @POST("/dictarDefinicion")
+    suspend fun definicion(@Body requestBody: RequestBody) : Response<ResponseBody>
+
 }
