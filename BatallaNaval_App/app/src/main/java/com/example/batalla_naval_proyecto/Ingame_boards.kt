@@ -1,14 +1,23 @@
 package com.example.batalla_naval_proyecto
 
-import android.graphics.Color
 import android.graphics.PointF
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
+
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Response
+import retrofit2.Retrofit
 
 class Ingame_boards : AppCompatActivity() {
     private val met = Metodos()
@@ -19,35 +28,91 @@ class Ingame_boards : AppCompatActivity() {
     private var celdasEnemigas = arrayOf<Array<TextView>>()
     private var esMiTurno:Boolean = false //Variable usada para pasar la bandera de quién ataca
     private var numJugador: Int = 0
+    private var numeroJugada : Int =  3
+    private var turnoJugada : Int = 2
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_ingame_boards)
+        numJugador = 1
+        inicializarCeldas()
+        esperarAtaque()
+
+        //Recibimos tablero enemigo
+       // recibirTablero()
+        // esMiTurno = false;
+    }
+
 
     fun atacarCelda(coord: PointF){
 
-        //Para mandar llamar a atacar la celda,
+        //coord.x = 4f
+        //coord.y = 5f
+
+
+        val jsonObject = JSONObject()
+        jsonObject.put("numero_jugada", this.numeroJugada)
+        jsonObject.put("turno_jugada", this.turnoJugada)
+        jsonObject.put("pos_x", coord.x)
+        jsonObject.put("pos_y", coord.y)
+
+
+        //Se convierte el objeto Json a String
+        var jsonString = jsonObject.toString()
+
+        val requestBody = jsonString.toRequestBody("application/json".toMediaTypeOrNull())
+        val retrofit = met.getRetrofit()
+
+
+        val service = retrofit.create(APIService::class.java)
+
+        //Mandamos llamar a atacar la celda, con el JSON que se generó arriba
         CoroutineScope(Dispatchers.IO).launch {
 
-            val
+            val response = service.atacar(requestBody)
+            withContext(Dispatchers.Main) {
+                //El siguiente IF controla si se pudo conectar a la API o no
+                if (response.isSuccessful) {
+                    // Convert raw JSON to pretty JSON using GSON library
+                    val gson = GsonBuilder().setPrettyPrinting().create()
+                    val prettyJson = gson.toJson(
+                        JsonParser.parseString(
+                            response.body()?.string() // About this thread blocking annotation : https://github.com/square/retrofit/issues/3255
+                        )
+                    )
+                    Log.d("Pretty Printed JSON :", prettyJson)
 
-            //var numeroTablero: Int = numJugador
-            /*val call = met.getRetrofit().create(APIService::class.java)
-                .getTablero("/tablero/${numeroTablero}/").execute()
-            //Tenemos ya el tablero
-            val tablero = call.body() as tableroResponse**/
+                } else {
+                    //Log.e("RETROFIT_ERROR", response.code().toString())
+                }
+            }
+        }
+    }
 
 
+    fun esperarAtaque(){
+        var turnoNuevo = this.turnoJugada
 
-            //Lo guardamos en un arraylist de tipo booleano
-            //matrizAmiga = convertirTablero(tablero)
+        CoroutineScope(Dispatchers.IO).launch {
+            //withContext(Dispatchers.Main) {
+
+                while(turnoNuevo == turnoJugada) {
+                    println("ESPERANDO ATAQUE")
+
+                    val call : Response<posicionResponse> = met.getRetrofit().create(APIService::class.java).preguntarPosicion("/preguntarPosicion")
+                    val posicionAtacada = call.body() as posicionResponse
+                    turnoNuevo = posicionAtacada.array[0].turno_jugada
+                    println("turnoNuevo = ${turnoNuevo} vs turnoJugada = ${turnoJugada}")
+                    Thread.sleep(2000)
+                }
+                turnoJugada = turnoNuevo;
+                println("SALIÓOO")
+            //}
         }
 
-        //Al atacar la celda,
-
-        //Funcion a implementar con API
-        //if(!esMiTurno) return //Talvez mostrar el tiempo restante del enemigo en pantalla
-
-        //Desactivar la celda atacada. (not clickable)
-
-        //
     }
+
 
     private fun inicializarCeldas(){
         var miCeldaA1 = findViewById(R.id.bttnCelda_A_1) as TextView
@@ -316,6 +381,7 @@ class Ingame_boards : AppCompatActivity() {
             }
         }
     }
+
 
 }
 

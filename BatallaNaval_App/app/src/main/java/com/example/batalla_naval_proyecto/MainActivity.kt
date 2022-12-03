@@ -16,13 +16,15 @@ class MainActivity : AppCompatActivity() {
         cargarTablero()
     }
 
+
+
     private fun cargarTablero() {
         CoroutineScope(Dispatchers.IO).launch {
             var fila: Int = 0
             val call = met.getRetrofit().create(APIService::class.java).getTablero("").execute()
-            val tablero = call.body() as tableroResponse
+            val tablero = call.body() as posicionResponse
             //println("El tablero es: "+tablero)
-            for(i in tablero.array){
+            /*for(i in tablero.array){
                 println("Fila $fila col1 ${i.col1} col2 ${i.col2}")
                 var filaLista : ArrayList<Boolean> = ArrayList()
                 filaLista.add( toBoolean(i.col1))
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     print("${matriz[i][j]} ")
                 }
                 println()
-            }
+            }*/
         }
         /*doAsync {
             val call = met.getRetrofit().create(APIService::class.java).getTablero("$query/images").execute()

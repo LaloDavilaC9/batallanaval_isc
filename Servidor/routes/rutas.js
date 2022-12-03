@@ -13,11 +13,14 @@ router.get("/tablero/:jugador", [], (req, res) => {
   });
 });
 
+
+//Pregunta qué posición atacó el contrario
 router.get("/preguntarPosicion", [], (req, res) => {
   info.getPosicion(connection,req, (data) => {
     res.json(data);
   });
 });
+
 
 //Se manda llamar cuando un jugador ataca al otro
 router.post(
@@ -36,6 +39,8 @@ router.post(
   }
 );
 
+
+//Indica si le atinó o no
 router.post(
   "/dictarDefinicion",
   (req, res) => {
