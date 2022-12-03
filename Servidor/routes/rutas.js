@@ -19,8 +19,9 @@ router.get("/preguntarPosicion", [], (req, res) => {
   });
 });
 
+//Se manda llamar cuando un jugador ataca al otro
 router.post(
-  "/decirPosicion",
+  "/atacarCelda",
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

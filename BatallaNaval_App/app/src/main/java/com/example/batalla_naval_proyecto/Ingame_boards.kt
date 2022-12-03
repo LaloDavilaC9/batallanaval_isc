@@ -21,8 +21,28 @@ class Ingame_boards : AppCompatActivity() {
     private var numJugador: Int = 0
 
     fun atacarCelda(coord: PointF){
+
+        //Para mandar llamar a atacar la celda,
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val
+
+            //var numeroTablero: Int = numJugador
+            /*val call = met.getRetrofit().create(APIService::class.java)
+                .getTablero("/tablero/${numeroTablero}/").execute()
+            //Tenemos ya el tablero
+            val tablero = call.body() as tableroResponse**/
+
+
+
+            //Lo guardamos en un arraylist de tipo booleano
+            //matrizAmiga = convertirTablero(tablero)
+        }
+
+        //Al atacar la celda,
+
         //Funcion a implementar con API
-        if(!esMiTurno) return //Talvez mostrar el tiempo restante del enemigo en pantalla
+        //if(!esMiTurno) return //Talvez mostrar el tiempo restante del enemigo en pantalla
 
         //Desactivar la celda atacada. (not clickable)
 
