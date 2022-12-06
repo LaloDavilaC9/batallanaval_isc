@@ -104,7 +104,6 @@ class Ingame_boards : AppCompatActivity() {
 
                             println("TERMINÓ DE ESPERAR DEFINICION  RESULTADO = ${acierto}")
 
-
                             //Aquí se programa qué pasa cuando se acierta el ataque al enemigo
                             if(acierto == 1){
                                 //Si se acierta, se actualiza el tablero de ataque con una celda roja.
@@ -115,6 +114,12 @@ class Ingame_boards : AppCompatActivity() {
                             }
                             //Sin importar si se acierta o no, se deshabilita la celda presionada
                             celdasEnemigas[coord.x.toInt()][coord.y.toInt()].isClickable = false
+
+                            //Le toca al otro jugador
+                            cambiarTurno()
+
+                            //Como ya recibimos información de si el ataque nuestro fue certero o no, entonces ahora esperamos el ataque del enemigo
+                            esperarAtaque()
                         }
 
                     } else {
@@ -126,6 +131,12 @@ class Ingame_boards : AppCompatActivity() {
 
     }
 
+    fun cambiarTurno(){
+        if(turnoJugada == 1)
+            turnoJugada = 2
+        else
+            turnoJugada = 1
+    }
 
     fun esperarAtaque() {
         var turnoNuevo = this.turnoJugada
@@ -143,7 +154,7 @@ class Ingame_boards : AppCompatActivity() {
                 pos_y = posicionAtacada.array[0].pos_y
                 numeroJugada = posicionAtacada.array[0].numero_jugada
 
-                    //println("turnoNuevo = ${turnoNuevo} vs turnoJugada = ${turnoJugada}")
+                //println("turnoNuevo = ${turnoNuevo} vs turnoJugada = ${turnoJugada}")
                 Thread.sleep(2000)
             }
             //Cambió el turno
@@ -189,6 +200,9 @@ class Ingame_boards : AppCompatActivity() {
                         //Log.e("RETROFIT_ERROR", response.code().toString())
                     }
                 }
+
+                //Le toca a este jugador
+                cambiarTurno()
             }
         }
     }
