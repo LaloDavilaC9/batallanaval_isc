@@ -1,5 +1,6 @@
 package com.example.batalla_naval_proyecto
 
+import android.graphics.Color
 import android.graphics.PointF
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -105,6 +106,15 @@ class Ingame_boards : AppCompatActivity() {
 
 
                             //Aquí se programa qué pasa cuando se acierta el ataque al enemigo
+                            if(acierto == 1){
+                                //Si se acierta, se actualiza el tablero de ataque con una celda roja.
+                                celdasEnemigas[coord.x.toInt()][coord.y.toInt()].setBackgroundColor(Color.RED)
+                            }else{
+                                //Si no se acierta, se actualiza el tablero de ataque con una celda blanca.
+                                celdasEnemigas[coord.x.toInt()][coord.y.toInt()].setBackgroundColor(Color.WHITE)
+                            }
+                            //Sin importar si se acierta o no, se deshabilita la celda presionada
+                            celdasEnemigas[coord.x.toInt()][coord.y.toInt()].isClickable = false
                         }
 
                     } else {

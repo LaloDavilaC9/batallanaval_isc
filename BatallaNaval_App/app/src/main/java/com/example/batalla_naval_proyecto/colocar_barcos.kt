@@ -21,6 +21,8 @@ class colocar_barcos : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_colocar_barcos)
 
+        var botonIniciar = findViewById(R.id.botonConfirmar) as TextView
+
         var celdaA1 = findViewById(R.id.bttnCelda_A_1) as TextView
         var celdaA2 = findViewById(R.id.bttnCelda_A_2) as TextView
         var celdaA3 = findViewById(R.id.bttnCelda_A_3) as TextView
