@@ -166,6 +166,7 @@ class Ingame_boards : AppCompatActivity() {
             turnoJugada = 2
         else
             turnoJugada = 1
+        numeroJugada++
     }
 
     fun esperarAtaque() {
