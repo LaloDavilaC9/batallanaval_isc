@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
+import kotlinx.android.synthetic.main.activity_inicio_sesion.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,13 +38,24 @@ class Ingame_boards : AppCompatActivity() {
     //Esta variable almacena el número de turno actual
     private var turnoJugada: Int = 1
 
+
+    private var correoHost : String = ""
+    private var correoInvitado : String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingame_boards)
+
+        turnoJugador = intent.getSerializableExtra("turnoJugador") as Int
+        correoHost = intent.getSerializableExtra("correoHost") as String
+        correoInvitado = intent.getSerializableExtra("correoInvitado") as String
+
         inicializarCeldas()
         celdasOcupadas = intent.getSerializableExtra("misCeldas") as Array<BooleanArray>
         colorearMisCeldas()
-        //esperarAtaque()
+
+        if(turnoJugador == 2)
+            esperarAtaque()
 
         //Recibimos tablero enemigo
         // recibirTablero()
@@ -101,16 +113,18 @@ class Ingame_boards : AppCompatActivity() {
                         println("numeroJugadaNueva = ${numeroJugadaNueva} vs numeroJugada = ${numeroJugada}")
                         var acierto = -1 //0. NO  ACERTÓ     1. SI ACERTÓ
                         CoroutineScope(Dispatchers.IO).launch {
-                            //withContext(Dispatchers.Main) {
+                            withContext(Dispatchers.Main) {
                             //Si este While se cumple, significa que aún no se dicta la definición, por lo tanto debe de seguir preguntando
                             while (numeroJugadaNueva != numeroJugada) {
                                 println("ESPERANDO DEFINICIÓN ")
                                 val call: Response<certezaResponse> = met.getRetrofit().create(APIService::class.java).preguntarCerteza("/preguntarCerteza")
                                 val definicion = call.body() as certezaResponse
 
-                                numeroJugadaNueva = definicion.array[0].no_jugada
-                                acierto = definicion.array[0].ataqueCertero
-                                println("numeroJugadaNueva = ${numeroJugadaNueva} vs numeroJugada = ${numeroJugada}")
+                                if(definicion.array.size>0){
+                                    numeroJugadaNueva = definicion.array[0].no_jugada
+                                    acierto = definicion.array[0].ataqueCertero
+                                    println("numeroJugadaNueva = ${numeroJugadaNueva} vs numeroJugada = ${numeroJugada}")
+                                }
                                 Thread.sleep(2000)
                             }
 
@@ -134,9 +148,11 @@ class Ingame_boards : AppCompatActivity() {
 
                             //Como ya recibimos información de si el ataque nuestro fue certero o no, entonces ahora esperamos el ataque del enemigo
                             esperarAtaque()
+                            }
                         }
 
-                    } else {
+                    }
+                    else {
                         //Log.e("RETROFIT_ERROR", response.code().toString())
                     }
                 }
@@ -153,23 +169,23 @@ class Ingame_boards : AppCompatActivity() {
     }
 
     fun esperarAtaque() {
-        var turnoNuevo = this.turnoJugada
+        var turnoNuevo = 0
         var pos_x: Int = -1
         var pos_y: Int = -1
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.Main) {
 
-                while (turnoNuevo == turnoJugada) {
+                while (turnoNuevo != turnoJugada) {
                     println("ESPERANDO ATAQUE")
-                    val call: Response<posicionResponse> =
-                        met.getRetrofit().create(APIService::class.java)
-                            .preguntarPosicion("/preguntarPosicion")
+                    val call: Response<posicionResponse> = met.getRetrofit().create(APIService::class.java).preguntarPosicion("/preguntarPosicion")
                     val posicionAtacada = call.body() as posicionResponse
-                    turnoNuevo = posicionAtacada.array[0].turno_jugada
-                    pos_x = posicionAtacada.array[0].pos_x
-                    pos_y = posicionAtacada.array[0].pos_y
-                    numeroJugada = posicionAtacada.array[0].numero_jugada
+                    if(posicionAtacada.array.size > 0){
+                        turnoNuevo = posicionAtacada.array[0].turno_jugada
+                        pos_x = posicionAtacada.array[0].pos_x
+                        pos_y = posicionAtacada.array[0].pos_y
+                        numeroJugada = posicionAtacada.array[0].numero_jugada
 
+                    }
                     //println("turnoNuevo = ${turnoNuevo} vs turnoJugada = ${turnoJugada}")
                     Thread.sleep(2000)
                 }

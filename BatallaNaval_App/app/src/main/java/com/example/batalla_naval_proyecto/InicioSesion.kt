@@ -1,5 +1,6 @@
 package com.example.batalla_naval_proyecto
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -39,6 +40,10 @@ class InicioSesion : AppCompatActivity() {
                 println("Compara ${info.array[0].password} VS ${txtContrasena.text.toString()}")
                 if(info.array[0].password == txtContrasena.text.toString()){
                     println("Inicio correcto")
+
+                    val intent = Intent(applicationContext, EnlazarJugadores::class.java)
+                    intent.putExtra("correoHost",txtCorreo.text.toString())
+                    startActivity(intent)
 
                 }
                 else{

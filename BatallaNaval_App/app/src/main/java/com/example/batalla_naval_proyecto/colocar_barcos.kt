@@ -17,10 +17,18 @@ class colocar_barcos : AppCompatActivity() {
     private var direccActual: PointF = PointF(0f,1f)
 
     private var indexBarcoActual:Int = 0
+    private var turnoJugador : Int = 0
+    private var correoHost : String = ""
+    private var correoInvitado : String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_colocar_barcos)
+
+        turnoJugador = intent.getSerializableExtra("turnoJugador") as Int
+        correoHost = intent.getSerializableExtra("correoHost") as String
+        correoInvitado = intent.getSerializableExtra("correoInvitado") as String
 
         var botonIniciar = findViewById(R.id.botonConfirmar) as TextView
 
@@ -184,6 +192,10 @@ class colocar_barcos : AppCompatActivity() {
             if(bandera != 1){
                 val intent = Intent(this, Ingame_boards::class.java)
                 intent.putExtra("misCeldas",celdasOcupadas)
+                intent.putExtra("turnoJugador",turnoJugador)
+                intent.putExtra("correoHost", correoHost)
+                intent.putExtra("correoInvitado", correoInvitado)
+
                 startActivity(intent)
             }
 

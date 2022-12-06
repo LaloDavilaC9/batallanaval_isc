@@ -59,6 +59,12 @@ router.post(
   }
 );
 
+//Checa la información del usuario
+router.get("/jugador/:correo", [], (req, res) => {
+  info.getInfoUsuario(connection,req, (data) => {
+    res.json(data);
+  });
+});
 
 
 //Pregunta si hay invitaciones para el jugador

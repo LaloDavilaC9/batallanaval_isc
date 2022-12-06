@@ -1,5 +1,6 @@
 package com.example.batalla_naval_proyecto
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,8 +30,10 @@ class EnlazarJugadores : AppCompatActivity() {
         setContentView(R.layout.activity_enlazar_jugadores)
 
         //Esto tiene que ser enviado por parámetro de la otra actividad
-        txtCorreoHost = "david@gmail.com"
-        txtCorreoHost = "adrian@gmail.com"
+        txtCorreoHost = intent.getSerializableExtra("correoHost") as String
+
+
+
         btnInvitar = findViewById(R.id.btnInvitar)
         txtCorreoInvitado = findViewById(R.id.textCorreo)
         escucharInvitacion()
@@ -82,6 +85,15 @@ class EnlazarJugadores : AppCompatActivity() {
                             Log.d("Pretty Printed JSON :", prettyJson)
                             println("Invitación confirmada")
                             bandera = 1
+
+                            //ESTE JUGADOR ES EL INVITADO, TENDRÁ EL TURNO 2... Mandaremos a colocar barcos
+                            val intent = Intent(applicationContext, colocar_barcos::class.java)
+
+                            intent.putExtra("turnoJugador",2)
+                            intent.putExtra("correoHost", invitacion.array[0].invita)
+                            intent.putExtra("correoInvitado",txtCorreoHost)
+                            startActivity(intent)
+
                         }
                     }
                 }
@@ -126,6 +138,7 @@ class EnlazarJugadores : AppCompatActivity() {
                     CoroutineScope(Dispatchers.IO).launch {
                         //withContext(Dispatchers.Main) {
                         var respuesta = 0
+                        var correoInvitado = ""
                         while (respuesta == 0) {
                             println("ESPERANDO A QUE SE ACEPTE O SE RECHAZE LA INVITACIÓN")
                             // println("${txtCorreoHost} a ${txtCorreoInvitado}")
@@ -133,6 +146,7 @@ class EnlazarJugadores : AppCompatActivity() {
                             val invitacion = call.body() as invitacionResponse
                             if(invitacion.array.size > 0){
                                 respuesta = invitacion.array[0].enlazado
+                                correoInvitado = invitacion.array[0].invitado
                             }
                             Thread.sleep(2000)
 
@@ -142,6 +156,12 @@ class EnlazarJugadores : AppCompatActivity() {
                             //ACEPTÓ LA INVITACIÓN
                             println("La invitación fue aceptada")
                             controlEscuchar = false
+                            val intent = Intent(applicationContext, colocar_barcos::class.java)
+
+                            intent.putExtra("turnoJugador",1)
+                            intent.putExtra("correoHost", txtCorreoHost)
+                            intent.putExtra("correoInvitado", correoInvitado)
+                            startActivity(intent)
                         }
                         else{
                             //Rechazó la invitación
