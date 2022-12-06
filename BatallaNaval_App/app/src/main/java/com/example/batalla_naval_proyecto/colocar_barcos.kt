@@ -1,5 +1,6 @@
 package com.example.batalla_naval_proyecto
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PointF
 import androidx.appcompat.app.AppCompatActivity
@@ -169,6 +170,17 @@ class colocar_barcos : AppCompatActivity() {
                     }
                 }
             }
+        }
+
+        botonIniciar.setOnClickListener{
+            for(barco in barcos){
+                if(!barco.estaPosicionado()) return@setOnClickListener
+            }
+
+            val intent = Intent(this, Ingame_boards::class.java)
+            intent.putExtra("misCeldas",celdasOcupadas)
+            startActivity(intent)
+
         }
 
         val handlerDireccionesYSelector = View.OnClickListener{ view->

@@ -26,7 +26,7 @@ class Ingame_boards : AppCompatActivity() {
 
     private var misCeldas = arrayOf<Array<TextView>>()
     private var celdasEnemigas = arrayOf<Array<TextView>>()
-
+    private var celdasOcupadas: Array<BooleanArray> = Array(10){BooleanArray(10)}
     //Esta variable almacena el turno que tiene el jugador. Si él crea la partida, tiene el turno 1, de lo contrario el 2
     private var turnoJugador = 1
 
@@ -40,11 +40,22 @@ class Ingame_boards : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingame_boards)
         inicializarCeldas()
+        celdasOcupadas = intent.getSerializableExtra("misCeldas") as Array<BooleanArray>
+        colorearMisCeldas()
         //esperarAtaque()
 
         //Recibimos tablero enemigo
         // recibirTablero()
         // esMiTurno = false;
+    }
+
+    fun colorearMisCeldas(){
+        for (i in 0 until 10) {
+            for (j in 0 until 10) {
+                if(celdasOcupadas[i][j])
+                    misCeldas[i][j].setBackgroundColor(Color.BLACK)
+            }
+        }
     }
 
 
