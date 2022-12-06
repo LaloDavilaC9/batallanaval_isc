@@ -7,6 +7,32 @@ const { body, param, validationResult } = require("express-validator");
 var router = express.Router();
 
 
+//Se manda llamar cuando un jugador se quiere registrar
+router.post(
+  "/registarJugador",
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.json({ success: false, err: JSON.stringify(errors) });
+      return;
+    }
+    console.log("La info: ",req.body);
+    let body = req.body;
+    info.registrarJugador(connection, body, (data) => {
+      res.json(data);
+    });
+  }
+);
+
+//Se manda llamar cuando un jugador se quiere registrar
+router.get("/jugador/:correo", [], (req, res) => {
+  info.getInfoUsuario(connection,req, (data) => {
+    res.json(data);
+  });
+});
+
+
+
 router.get("/tablero/:jugador", [], (req, res) => {
   info.getTablero(connection,req, (data) => {
     res.json(data);

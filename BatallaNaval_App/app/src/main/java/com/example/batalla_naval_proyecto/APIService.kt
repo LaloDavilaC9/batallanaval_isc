@@ -13,6 +13,12 @@ interface APIService {
    /* @GET
     suspend fun getTablero(@Url url:String) : Call<posicionResponse>*/
 
+    //Usuarios
+    @GET
+    suspend fun preguntarInfoUsuario(@Url url:String) : Response<usuarioResponse>
+
+
+    //Juego
     @GET
     suspend fun preguntarPosicion(@Url url:String) : Response<posicionResponse>
 
@@ -24,5 +30,7 @@ interface APIService {
 
     @POST("/dictarDefinicion")
     suspend fun definicion(@Body requestBody: RequestBody) : Response<ResponseBody>
+
+
 
 }

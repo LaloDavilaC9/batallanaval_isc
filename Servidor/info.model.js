@@ -39,6 +39,29 @@ module.exports = {
     });
   },
 
+  //Obtiene la información de inicio de sesión de un usuario
+  getInfoUsuario: (connection, req,callback) => {
+    const info = req.params;
+    //console.log("INFO: "+info.numero);
+    //var tablero = info.numero == 1 ? "tablero1" : "tablero2"; 
+    //"select * from "+tablero
+    var query= "SELECT * FROM jugador WHERE correo='"+info.correo+"'";
+    
+    connection.query(query, (err, results) => {
+      if (err) {
+        callback({
+          array: null,
+          id: null,
+          success: false,
+          err: JSON.stringify(err),
+        }); 
+        return;
+      }
+      callback({ array: results, success: "true" });
+    });
+  },
+
+
   //Dice su posición al otro jugador
   atacarPosicion: (connection, body, callback) => {
     //var turno_jugada = body.turno_jugada;
