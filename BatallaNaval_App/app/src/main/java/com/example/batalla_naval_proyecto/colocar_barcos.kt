@@ -174,7 +174,10 @@ class colocar_barcos : AppCompatActivity() {
 
         botonIniciar.setOnClickListener{
             for(barco in barcos){
-                if(!barco.estaPosicionado()) return@setOnClickListener
+                if(!barco.estaPosicionado()){
+                    Toast.makeText(this, "Coloca todos tus barcos.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
             }
 
             val intent = Intent(this, Ingame_boards::class.java)

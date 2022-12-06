@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import kotlinx.coroutines.CoroutineScope
@@ -119,9 +120,11 @@ class Ingame_boards : AppCompatActivity() {
                             if(acierto == 1){
                                 //Si se acierta, se actualiza el tablero de ataque con una celda roja.
                                 celdasEnemigas[coord.x.toInt()][coord.y.toInt()].setBackgroundColor(Color.RED)
+                                Toast.makeText(applicationContext, "¡Has acertado!", Toast.LENGTH_SHORT).show()
                             }else{
                                 //Si no se acierta, se actualiza el tablero de ataque con una celda blanca.
                                 celdasEnemigas[coord.x.toInt()][coord.y.toInt()].setBackgroundColor(Color.WHITE)
+                                Toast.makeText(applicationContext, "¡Has fallado!", Toast.LENGTH_SHORT).show()
                             }
                             //Sin importar si se acierta o no, se deshabilita la celda presionada
                             celdasEnemigas[coord.x.toInt()][coord.y.toInt()].isClickable = false
