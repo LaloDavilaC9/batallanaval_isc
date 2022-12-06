@@ -183,8 +183,10 @@ class Ingame_boards : AppCompatActivity() {
 
                 if(ataque == 1){
                     Toast.makeText(applicationContext, "¡Te han atacado!" , Toast.LENGTH_SHORT).show()
+                    misCeldas[pos_x][pos_y].setBackgroundColor(Color.RED)
                 }else{
                     Toast.makeText(applicationContext, "¡El enemigo ha fallado!" , Toast.LENGTH_SHORT).show()
+                    misCeldas[pos_x][pos_y].setBackgroundColor(Color.WHITE)
                 }
                 //0: NO FUE ATACADO    1. SI FUE ATACADO
 
