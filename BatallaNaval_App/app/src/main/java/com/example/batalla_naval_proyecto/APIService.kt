@@ -31,6 +31,7 @@ interface APIService {
     @POST("/dictarDefinicion")
     suspend fun definicion(@Body requestBody: RequestBody) : Response<ResponseBody>
 
-
+    @POST("/invitarJugador")
+    suspend fun  invitarJugador(@Body requestBody: RequestBody) : Response<ResponseBody>
 
 }

@@ -24,6 +24,23 @@ router.post(
   }
 );
 
+//Se manda llamar cuando un jugador quiere invitar a otro
+router.post(
+  "/invitarJugador",
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.json({ success: false, err: JSON.stringify(errors) });
+      return;
+    }
+    console.log("La info: ",req.body);
+    let body = req.body;
+    info.invitarJugador(connection, body, (data) => {
+      res.json(data);
+    });
+  }
+);
+
 //Se manda llamar cuando un jugador se quiere registrar
 router.get("/jugador/:correo", [], (req, res) => {
   info.getInfoUsuario(connection,req, (data) => {

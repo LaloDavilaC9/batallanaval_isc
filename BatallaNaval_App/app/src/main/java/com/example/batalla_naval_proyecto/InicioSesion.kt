@@ -45,7 +45,6 @@ class InicioSesion : AppCompatActivity() {
                     println("Inicio INCORRECTO")
                 }
             }
-
         }
     }
 }

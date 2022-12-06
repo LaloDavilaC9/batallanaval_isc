@@ -20,6 +20,8 @@ module.exports = {
   },
   
 
+
+
   //Mete a un nuevo jugador a la base de datos
   registrarJugador: (connection, body, callback) => {
     //var turno_jugada = body.turno_jugada;
@@ -61,6 +63,26 @@ module.exports = {
     });
   },
 
+  
+
+   //Invita a un jugador a una partida
+   invitarJugador: (connection, body, callback) => {
+    //var turno_jugada = body.turno_jugada;
+    //console.log("El turno es: "+turno_jugada);
+    //var query  = "INSERT INTO `jugada` (`numero_jugada`, `turno_jugada`, `pos_x`, `pos_y`) VALUES (NULL, '2', '4', '3');"
+    connection.query("insert into invitacion SET ?", body, (err, results) => {
+      if (err) {
+        callback({
+          array: body,
+          id: null,
+          success: false,
+          err: JSON.stringify(err),
+        });
+        return;
+      }
+      callback({ array: null, id: null, success: true });
+    });
+  },
 
   //Dice su posición al otro jugador
   atacarPosicion: (connection, body, callback) => {
