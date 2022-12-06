@@ -31,12 +31,32 @@ class EnlazarJugadores : AppCompatActivity() {
         txtCorreoHost = "david@gmail.com"
         btnInvitar = findViewById(R.id.btnInvitar)
         txtCorreoInvitado = findViewById(R.id.textCorreo)
+        escucharInvitacion()
         btnInvitar.setOnClickListener {
             invitarJugador()
         }
 
     }
 
+    //Está a la espera de que reciba una invitación a jugar
+    fun escucharInvitacion(){
+        var bandera = 0
+        CoroutineScope(Dispatchers.IO).launch {
+            //withContext(Dispatchers.Main) {
+
+            while (bandera == 0) {
+                println("ESPERANDO INVITACIÓN DE ALGUIEN")
+                val call: Response<invitacionResponse> = met.getRetrofit().create(APIService::class.java).preguntarInvitacion("/invitaciones/${txtCorreoHost}")
+                val invitacion = call.body() as invitacionResponse
+                if(invitacion.array.size>0){
+                    println("ME ESTÁ INVITANDO A JUGAR ${invitacion.array[0].invita}")
+                    bandera = 1
+                }
+                //println("turnoNuevo = ${turnoNuevo} vs turnoJugada = ${turnoJugada}")
+                Thread.sleep(2000)
+            }
+        }
+    }
     fun invitarJugador(){
         val jsonObject = JSONObject()
         jsonObject.put("invita", this.txtCorreoHost)

@@ -41,9 +41,9 @@ router.post(
   }
 );
 
-//Se manda llamar cuando un jugador se quiere registrar
-router.get("/jugador/:correo", [], (req, res) => {
-  info.getInfoUsuario(connection,req, (data) => {
+//Pregunta si hay invitaciones para el jugador
+router.get("/invitaciones/:correo", [], (req, res) => {
+  info.getInfoInvitaciones(connection,req, (data) => {
     res.json(data);
   });
 });
