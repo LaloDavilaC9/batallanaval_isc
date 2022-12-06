@@ -35,9 +35,14 @@ interface APIService {
     @GET
     suspend fun preguntarInvitacion(@Url url:String) : Response<invitacionResponse>
 
+    @GET
+    suspend fun preguntarConfirmacion(@Url url:String) : Response<invitacionResponse>
+
     @POST("/invitarJugador")
     suspend fun  invitarJugador(@Body requestBody: RequestBody) : Response<ResponseBody>
 
     @POST("/confirmarInvitacion")
     suspend fun  confirmarInvitacion(@Body requestBody: RequestBody) : Response<ResponseBody>
+
+
 }

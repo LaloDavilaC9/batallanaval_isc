@@ -22,6 +22,7 @@ class EnlazarJugadores : AppCompatActivity() {
     private lateinit var btnInvitar : Button
     private lateinit var txtCorreoInvitado : EditText
     private lateinit var txtCorreoHost : String
+    private  var controlEscuchar : Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,7 @@ class EnlazarJugadores : AppCompatActivity() {
 
         //Esto tiene que ser enviado por parámetro de la otra actividad
         txtCorreoHost = "david@gmail.com"
+        txtCorreoHost = "adrian@gmail.com"
         btnInvitar = findViewById(R.id.btnInvitar)
         txtCorreoInvitado = findViewById(R.id.textCorreo)
         escucharInvitacion()
@@ -44,7 +46,7 @@ class EnlazarJugadores : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             //withContext(Dispatchers.Main) {
 
-            while (bandera == 0) {
+            while (bandera == 0 && controlEscuchar) {
                 println("ESPERANDO INVITACIÓN DE ALGUIEN")
                 val call: Response<invitacionResponse> = met.getRetrofit().create(APIService::class.java).preguntarInvitacion("/invitaciones/${txtCorreoHost}")
                 val invitacion = call.body() as invitacionResponse
@@ -52,8 +54,8 @@ class EnlazarJugadores : AppCompatActivity() {
                     println("ME ESTÁ INVITANDO A JUGAR ${invitacion.array[0].invita}")
                     //Invitación se acepta por default
                     val jsonObject = JSONObject()
-                    jsonObject.put("invita", txtCorreoHost)
-                    jsonObject.put("invitado", txtCorreoInvitado.text.toString())
+                    jsonObject.put("invitado", txtCorreoHost)
+                    jsonObject.put("invita", invitacion.array[0].invita)
                     jsonObject.put("enlazado", 1)
 
                     //Se convierte el objeto Json a String
@@ -61,34 +63,32 @@ class EnlazarJugadores : AppCompatActivity() {
 
                     val requestBody = jsonString.toRequestBody("application/json".toMediaTypeOrNull())
                     val retrofit = met.getRetrofit()
-
+                    print("El json: "+jsonString)
 
                     val service = retrofit.create(APIService::class.java)
 
-                    //Mandamos llamar a atacar la celda, con el JSON que se generó arriba
                     CoroutineScope(Dispatchers.IO).launch {
 
                         val response = service.confirmarInvitacion(requestBody)
-                        withContext(Dispatchers.Main) {
-                            //El siguiente IF controla si se pudo conectar a la API o no
-                            if (response.isSuccessful) {
-                                // Convert raw JSON to pretty JSON using GSON library
-                                val gson = GsonBuilder().setPrettyPrinting().create()
-                                val prettyJson = gson.toJson(
-                                    JsonParser.parseString(
-                                        response.body()?.string()
-                                    )
+                        //El siguiente IF controla si se pudo conectar a la API o no
+                        if (response.isSuccessful) {
+                            // Convert raw JSON to pretty JSON using GSON library
+                            val gson = GsonBuilder().setPrettyPrinting().create()
+                            val prettyJson = gson.toJson(
+                                JsonParser.parseString(
+                                    response.body()?.string()
                                 )
-                                Log.d("Pretty Printed JSON :", prettyJson)
-                                println("Invitación confirmada")
-                                bandera = 1
-                            }
+                            )
+                            Log.d("Pretty Printed JSON :", prettyJson)
+                            println("Invitación confirmada")
+                            bandera = 1
                         }
                     }
                 }
                 //println("turnoNuevo = ${turnoNuevo} vs turnoJugada = ${turnoJugada}")
                 Thread.sleep(2000)
             }
+            println("Dejó de recibir invitaciones")
         }
     }
     fun invitarJugador(){
@@ -106,7 +106,7 @@ class EnlazarJugadores : AppCompatActivity() {
 
         val service = retrofit.create(APIService::class.java)
 
-        //Mandamos llamar a atacar la celda, con el JSON que se generó arriba
+        //Se manda la invitación
         CoroutineScope(Dispatchers.IO).launch {
 
             val response = service.invitarJugador(requestBody)
@@ -121,6 +121,34 @@ class EnlazarJugadores : AppCompatActivity() {
                         )
                     )
                     Log.d("Pretty Printed JSON :", prettyJson)
+
+                    //Ahora tiene que esperar a que se acepte o rechaze la invitación
+                    CoroutineScope(Dispatchers.IO).launch {
+                        //withContext(Dispatchers.Main) {
+                        var respuesta = 0
+                        while (respuesta == 0) {
+                            println("ESPERANDO A QUE SE ACEPTE O SE RECHAZE LA INVITACIÓN")
+                            // println("${txtCorreoHost} a ${txtCorreoInvitado}")
+                            val call: Response<invitacionResponse> = met.getRetrofit().create(APIService::class.java).preguntarConfirmacion("/invitacion/${txtCorreoInvitado.text.toString()}/${txtCorreoHost}")
+                            val invitacion = call.body() as invitacionResponse
+                            if(invitacion.array.size > 0){
+                                respuesta = invitacion.array[0].enlazado
+                            }
+                            Thread.sleep(2000)
+
+                        }
+
+                        if(respuesta == 1){
+                            //ACEPTÓ LA INVITACIÓN
+                            println("La invitación fue aceptada")
+                            controlEscuchar = false
+                        }
+                        else{
+                            //Rechazó la invitación
+                            println("La invitación fue rechazada")
+                        }
+
+                    }
                 }
             }
         }

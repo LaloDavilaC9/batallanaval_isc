@@ -111,6 +111,7 @@ confirmarInvitacion: (connection, body, callback) => {
       //var turno_jugada = body.turno_jugada;
       //console.log("El turno es: "+turno_jugada);
       //var query  = "INSERT INTO `jugada` (`numero_jugada`, `turno_jugada`, `pos_x`, `pos_y`) VALUES (NULL, '2', '4', '3');"
+      console.log("Probandooo enlazado: "+body.enlazado)
       connection.query("update invitacion SET enlazado = "+body.enlazado+" WHERE invita='"+body.invita+"' and invitado='"+body.invitado+"'", body, (err, results) => {
         if (err) {
           callback({
@@ -125,6 +126,27 @@ confirmarInvitacion: (connection, body, callback) => {
       });
     },
 
+//Verificar si aceptó o no la invitación
+  getInfoInvitacion: (connection, req,callback) => {
+    const info = req.params;
+    console.log("INFO: "+info.correo);
+    //var tablero = info.numero == 1 ? "tablero1" : "tablero2"; 
+    //"select * from "+tablero
+    var query= "SELECT * FROM invitacion WHERE invitado='"+info.correoInvitado+"' and invita='"+info.correoHost+"'" ;
+    
+    connection.query(query, (err, results) => {
+      if (err) {
+        callback({
+          array: null,
+          id: null,
+          success: false,
+          err: JSON.stringify(err),
+        }); 
+        return;
+      }
+      callback({ array: results, success: "true" });
+    });
+  },
 
   //Dice su posición al otro jugador
   atacarPosicion: (connection, body, callback) => {

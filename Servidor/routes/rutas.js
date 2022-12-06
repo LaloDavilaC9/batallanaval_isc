@@ -68,6 +68,13 @@ router.get("/invitaciones/:correo", [], (req, res) => {
   });
 });
 
+//Pregunta si ya hubo una respuesta para la invitación
+router.get("/invitacion/:correoInvitado/:correoHost", [], (req, res) => {
+  info.getInfoInvitacion(connection,req, (data) => {
+    res.json(data);
+  });
+});
+
 
 
 router.get("/tablero/:jugador", [], (req, res) => {
