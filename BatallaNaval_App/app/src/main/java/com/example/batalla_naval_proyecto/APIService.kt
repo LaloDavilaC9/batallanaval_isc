@@ -38,4 +38,6 @@ interface APIService {
     @POST("/invitarJugador")
     suspend fun  invitarJugador(@Body requestBody: RequestBody) : Response<ResponseBody>
 
+    @POST("/confirmarInvitacion")
+    suspend fun  confirmarInvitacion(@Body requestBody: RequestBody) : Response<ResponseBody>
 }

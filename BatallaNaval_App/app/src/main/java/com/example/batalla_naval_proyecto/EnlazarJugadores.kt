@@ -50,7 +50,41 @@ class EnlazarJugadores : AppCompatActivity() {
                 val invitacion = call.body() as invitacionResponse
                 if(invitacion.array.size>0){
                     println("ME ESTÁ INVITANDO A JUGAR ${invitacion.array[0].invita}")
-                    bandera = 1
+                    //Invitación se acepta por default
+                    val jsonObject = JSONObject()
+                    jsonObject.put("invita", txtCorreoHost)
+                    jsonObject.put("invitado", txtCorreoInvitado.text.toString())
+                    jsonObject.put("enlazado", 1)
+
+                    //Se convierte el objeto Json a String
+                    var jsonString = jsonObject.toString()
+
+                    val requestBody = jsonString.toRequestBody("application/json".toMediaTypeOrNull())
+                    val retrofit = met.getRetrofit()
+
+
+                    val service = retrofit.create(APIService::class.java)
+
+                    //Mandamos llamar a atacar la celda, con el JSON que se generó arriba
+                    CoroutineScope(Dispatchers.IO).launch {
+
+                        val response = service.confirmarInvitacion(requestBody)
+                        withContext(Dispatchers.Main) {
+                            //El siguiente IF controla si se pudo conectar a la API o no
+                            if (response.isSuccessful) {
+                                // Convert raw JSON to pretty JSON using GSON library
+                                val gson = GsonBuilder().setPrettyPrinting().create()
+                                val prettyJson = gson.toJson(
+                                    JsonParser.parseString(
+                                        response.body()?.string()
+                                    )
+                                )
+                                Log.d("Pretty Printed JSON :", prettyJson)
+                                println("Invitación confirmada")
+                                bandera = 1
+                            }
+                        }
+                    }
                 }
                 //println("turnoNuevo = ${turnoNuevo} vs turnoJugada = ${turnoJugada}")
                 Thread.sleep(2000)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2022 at 08:02 AM
+-- Generation Time: Dec 06, 2022 at 05:50 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -55,6 +55,27 @@ CREATE TABLE `barco` (
 INSERT INTO `barco` (`id_barco`, `casillas`, `posx`, `posy`, `vivo`, `num_jug`) VALUES
 (1, 2, 0, 0, 1, 1),
 (1, 2, 0, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invitacion`
+--
+
+CREATE TABLE `invitacion` (
+  `id_invitacion` int(11) NOT NULL,
+  `invita` varchar(255) NOT NULL,
+  `invitado` varchar(255) NOT NULL,
+  `enlazado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `invitacion`
+--
+
+INSERT INTO `invitacion` (`id_invitacion`, `invita`, `invitado`, `enlazado`) VALUES
+(2, 'david@gmail.com', 'adrian@gmail.com', 0),
+(5, 'adrian@gmail.com', 'david@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -174,6 +195,12 @@ ALTER TABLE `ataques`
   ADD KEY `no_jugada` (`no_jugada`);
 
 --
+-- Indexes for table `invitacion`
+--
+ALTER TABLE `invitacion`
+  ADD PRIMARY KEY (`id_invitacion`);
+
+--
 -- Indexes for table `jugada`
 --
 ALTER TABLE `jugada`
@@ -205,7 +232,13 @@ ALTER TABLE `tablero2`
 -- AUTO_INCREMENT for table `ataques`
 --
 ALTER TABLE `ataques`
-  MODIFY `indice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `indice` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `invitacion`
+--
+ALTER TABLE `invitacion`
+  MODIFY `id_invitacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `jugada`

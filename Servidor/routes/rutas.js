@@ -41,6 +41,26 @@ router.post(
   }
 );
 
+
+//Se manda llamar cuando un jugador quiere invitar a otro
+router.post(
+  "/confirmarInvitacion",
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.json({ success: false, err: JSON.stringify(errors) });
+      return;
+    }
+    console.log("La info: ",req.body);
+    let body = req.body;
+    info.confirmarInvitacion(connection, body, (data) => {
+      res.json(data);
+    });
+  }
+);
+
+
+
 //Pregunta si hay invitaciones para el jugador
 router.get("/invitaciones/:correo", [], (req, res) => {
   info.getInfoInvitaciones(connection,req, (data) => {
