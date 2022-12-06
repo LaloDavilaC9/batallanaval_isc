@@ -29,6 +29,9 @@ class Ingame_boards : AppCompatActivity() {
     private var misCeldas = arrayOf<Array<TextView>>()
     private var celdasEnemigas = arrayOf<Array<TextView>>()
     private var celdasOcupadas: Array<BooleanArray> = Array(10){BooleanArray(10)}
+    private lateinit var marcadorEnemigo : TextView
+    private var aciertos: Int = 0
+
     //Esta variable almacena el turno que tiene el jugador. Si él crea la partida, tiene el turno 1, de lo contrario el 2
     private var turnoJugador = 1
 
@@ -52,6 +55,7 @@ class Ingame_boards : AppCompatActivity() {
 
         inicializarCeldas()
         celdasOcupadas = intent.getSerializableExtra("misCeldas") as Array<BooleanArray>
+        marcadorEnemigo = findViewById(R.id.marcadorEnemigo)
         colorearMisCeldas()
 
         if(turnoJugador == 2)
@@ -135,6 +139,8 @@ class Ingame_boards : AppCompatActivity() {
                                 //Si se acierta, se actualiza el tablero de ataque con una celda roja.
                                 celdasEnemigas[coord.x.toInt()][coord.y.toInt()].setBackgroundColor(Color.RED)
                                 Toast.makeText(applicationContext, "¡Has acertado!", Toast.LENGTH_SHORT).show()
+                                aciertos++
+                                marcadorEnemigo.text = "Aciertos: "+aciertos+" de 16"
                             }else{
                                 //Si no se acierta, se actualiza el tablero de ataque con una celda blanca.
                                 celdasEnemigas[coord.x.toInt()][coord.y.toInt()].setBackgroundColor(Color.WHITE)
