@@ -7,7 +7,7 @@ data class usuarioObject(
     var id_jugador : Int,
     var nombre : String,
     var correo : String,
-    var contrasena : String
+    var password : String
 )
 
 

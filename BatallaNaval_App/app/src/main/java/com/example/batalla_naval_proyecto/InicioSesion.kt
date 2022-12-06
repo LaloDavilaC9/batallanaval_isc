@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,12 +31,15 @@ class InicioSesion : AppCompatActivity() {
     }
 
     fun verificarSesion(){
+
         CoroutineScope(Dispatchers.IO).launch {
-            val call: Response<usuarioResponse> = met.getRetrofit().create(APIService::class.java).preguntarInfoUsuario("/preguntarPosicion")
+            val call: Response<usuarioResponse> = met.getRetrofit().create(APIService::class.java).preguntarInfoUsuario("/jugador/${txtCorreo.text.toString()}")
             val info = call.body() as usuarioResponse
             if(info.array.size > 0){
-                if(info.array[0].contrasena == txtContrasena.text.toString()){
+                println("Compara ${info.array[0].password} VS ${txtContrasena.text.toString()}")
+                if(info.array[0].password == txtContrasena.text.toString()){
                     println("Inicio correcto")
+
                 }
                 else{
                     println("Inicio INCORRECTO")
