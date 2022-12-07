@@ -1,36 +1,33 @@
 package com.example.batalla_naval_proyecto
 
+
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PointF
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 
-class colocar_barcos : AppCompatActivity() {
+class Poner_Barcos : AppCompatActivity() {
+
+
     private var celdas = arrayOf<Array<TextView>>()
     private var barcos = arrayOf<Barco>()
     private var celdasOcupadas: Array<BooleanArray> = Array(10){BooleanArray(10)}
     private var direccActual: PointF = PointF(0f,1f)
 
     private var indexBarcoActual:Int = 0
-    private var turnoJugador : Int = 0
-    private var correoHost : String = ""
-    private var correoInvitado : String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_colocar_barcos)
+        setContentView(R.layout.activity_poner_barcos)
 
-        turnoJugador = intent.getSerializableExtra("turnoJugador") as Int
-        correoHost = intent.getSerializableExtra("correoHost") as String
-        correoInvitado = intent.getSerializableExtra("correoInvitado") as String
-
-        var botonIniciar = findViewById(R.id.confirmar) as TextView
+        var iniciar = findViewById<Button>(R.id.confirmar)
 
         var celdaA1 = findViewById(R.id.bttnCelda_A_1) as TextView
         var celdaA2 = findViewById(R.id.bttnCelda_A_2) as TextView
@@ -180,26 +177,11 @@ class colocar_barcos : AppCompatActivity() {
             }
         }
 
-        botonIniciar.setOnClickListener{
-            var bandera = 0
-            for(barco in barcos){
-                if(!barco.estaPosicionado()){
-                    Toast.makeText(this, "Coloca todos tus barcos.", Toast.LENGTH_SHORT).show()
-                    bandera = 1
-                }
-            }
+        iniciar.setOnClickListener{
+            val intent = Intent(this, juegoPvA::class.java)
+            intent.putExtra("Celdas",celdasOcupadas)
 
-            if(bandera != 1){
-                val intent = Intent(this, Ingame_boards::class.java)
-                intent.putExtra("misCeldas",celdasOcupadas)
-                intent.putExtra("turnoJugador",turnoJugador)
-                intent.putExtra("correoHost", correoHost)
-                intent.putExtra("correoInvitado", correoInvitado)
-
-                startActivity(intent)
-            }
-
-
+            startActivity(intent)
         }
 
         val handlerDireccionesYSelector = View.OnClickListener{ view->
@@ -300,5 +282,4 @@ class colocar_barcos : AppCompatActivity() {
         //Si el barco está dentro de límites, return true.
         return true
     }
-
 }

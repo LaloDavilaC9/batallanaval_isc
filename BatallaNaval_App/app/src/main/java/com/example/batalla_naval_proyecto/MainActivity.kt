@@ -20,13 +20,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         ia.setOnClickListener{
-            val intent = Intent(applicationContext, InicioSesion::class.java)
+            val intent = Intent(applicationContext, Poner_Barcos::class.java)
             startActivity(intent)
         }
 
 
     }
-
 
 
 

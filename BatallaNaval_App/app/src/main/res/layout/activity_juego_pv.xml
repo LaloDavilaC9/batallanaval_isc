@@ -1,0 +1,1828 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".juegoPvA">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/auxiliar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="Tablero Enemigo"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/marcadorEnemigo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aciertos: 0 de 15"
+            android:textSize="18sp"/>
+
+        <TableLayout
+            android:id="@+id/tabla1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#3BF3ED"
+            android:stretchColumns="0,1,2,3,4,5,6,7,8,9"
+            android:layout_weight="1">
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_A_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_B_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_C_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_D_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_E_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_F_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_G_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_H_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_I_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J1"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J2"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J3"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J4"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J5"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J6"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J7"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J8"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J9"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCeldaEnemiga_J_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J10"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="Mis Barcos"
+            android:textSize="20sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#3BF3ED"
+            android:stretchColumns="0,1,2,3,4,5,6,7,8,9"
+            android:layout_weight="1">
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_A_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="A10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_B_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="B10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_C_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="C10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_D_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="D10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_E_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="E10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_F_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="F10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_G_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="G10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_H_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="H10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I2"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I3"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I4"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I5"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I6"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I7"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I8"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I9"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_I_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="I10"
+                    android:textColor="#000000" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_1"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J1"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_2"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J2"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_3"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J3"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_4"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J4"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_5"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J5"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_6"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J6"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_7"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J7"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_8"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J8"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_9"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J9"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/bttnCelda_J_10"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:text="J10"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
