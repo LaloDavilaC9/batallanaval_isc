@@ -18,6 +18,18 @@ interface APIService {
     suspend fun preguntarInfoUsuario(@Url url:String) : Response<usuarioResponse>
 
 
+    //Reinicios
+    @POST("/borrarInvitacion")
+    suspend fun borrarInvitacion() : Response<ResponseBody>
+
+    //Reinicios
+    @POST("/borrarAtaques")
+    suspend fun borrarAtaques() : Response<ResponseBody>
+
+    //Reinicios
+    @POST("/borrarJugada")
+    suspend fun borrarJugada() : Response<ResponseBody>
+
     //Juego
     @GET
     suspend fun preguntarPosicion(@Url url:String) : Response<posicionResponse>
@@ -43,6 +55,7 @@ interface APIService {
 
     @POST("/confirmarInvitacion")
     suspend fun  confirmarInvitacion(@Body requestBody: RequestBody) : Response<ResponseBody>
+
 
 
 }

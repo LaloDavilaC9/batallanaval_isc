@@ -46,6 +46,8 @@ class EnlazarJugadores : AppCompatActivity() {
     //Está a la espera de que reciba una invitación a jugar
     fun escucharInvitacion(){
         var bandera = 0
+        borrarTodo()
+
         CoroutineScope(Dispatchers.IO).launch {
             //withContext(Dispatchers.Main) {
 
@@ -172,5 +174,32 @@ class EnlazarJugadores : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun borrarTodo(){
+        val retrofit = met.getRetrofit()
+
+
+        val service = retrofit.create(APIService::class.java)
+
+        //Se manda la invitación
+        CoroutineScope(Dispatchers.IO).launch {
+
+            var response = service.borrarInvitacion()
+            response = service.borrarAtaques()
+            response = service.borrarJugada()
+            //El siguiente IF controla si se pudo conectar a la API o no
+            if (response.isSuccessful) {
+                // Convert raw JSON to pretty JSON using GSON library
+                val gson = GsonBuilder().setPrettyPrinting().create()
+                val prettyJson = gson.toJson(
+                    JsonParser.parseString(
+                        response.body()?.string()
+                    )
+                )
+                Log.d("Pretty Printed JSON :", prettyJson)
+            }
+        }
+
     }
 }

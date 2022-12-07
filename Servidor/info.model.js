@@ -84,6 +84,63 @@ module.exports = {
     });
   },
 
+  //Borra la invitación
+  borrarInvitacion: (connection, body, callback) => {
+    //var turno_jugada = body.turno_jugada;
+    //console.log("El turno es: "+turno_jugada);
+    //var query  = "INSERT INTO `jugada` (`numero_jugada`, `turno_jugada`, `pos_x`, `pos_y`) VALUES (NULL, '2', '4', '3');"
+    connection.query("DELETE FROM invitacion; ", body, (err, results) => {
+      if (err) {
+        callback({
+          array: body,
+          id: null,
+          success: false,
+          err: JSON.stringify(err),
+        });
+        return;
+      }
+      callback({ array: null, id: null, success: true });
+    });
+  },
+
+
+   //Borra las jugadas
+   borrarJugadas: (connection, body, callback) => {
+    //var turno_jugada = body.turno_jugada;
+    //console.log("El turno es: "+turno_jugada);
+    //var query  = "INSERT INTO `jugada` (`numero_jugada`, `turno_jugada`, `pos_x`, `pos_y`) VALUES (NULL, '2', '4', '3');"
+    connection.query("DELETE  FROM jugada; ", body, (err, results) => {
+      if (err) {
+        callback({
+          array: body,
+          id: null,
+          success: false,
+          err: JSON.stringify(err),
+        });
+        return;
+      }
+      callback({ array: null, id: null, success: true });
+    });
+  },
+
+   //Borra los ataques
+   borrarAtaques: (connection, body, callback) => {
+    //var turno_jugada = body.turno_jugada;
+    //console.log("El turno es: "+turno_jugada);
+    //var query  = "INSERT INTO `jugada` (`numero_jugada`, `turno_jugada`, `pos_x`, `pos_y`) VALUES (NULL, '2', '4', '3');"
+    connection.query("  DELETE FROM ataques;  ", body, (err, results) => {
+      if (err) {
+        callback({
+          array: body,
+          id: null,
+          success: false,
+          err: JSON.stringify(err),
+        });
+        return;
+      }
+      callback({ array: null, id: null, success: true });
+    });
+  },
   //Indica si hay invitaciones para el jugador que llega como parámetro
   getInfoInvitaciones: (connection, req,callback) => {
     const info = req.params;

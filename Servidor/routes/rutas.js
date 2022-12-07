@@ -59,6 +59,57 @@ router.post(
   }
 );
 
+//Se manda llamar antes de iniciar una partida
+router.post(
+  "/borrarInvitacion",
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.json({ success: false, err: JSON.stringify(errors) });
+      return;
+    }
+    console.log("La info: ",req.body);
+    let body = req.body;
+    info.borrarInvitacion(connection, body, (data) => {
+      res.json(data);
+    });
+  }
+);
+
+//Se manda llamar antes de iniciar una partida
+router.post(
+  "/borrarJugada",
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.json({ success: false, err: JSON.stringify(errors) });
+      return;
+    }
+    console.log("La info: ",req.body);
+    let body = req.body;
+    info.borrarJugadas(connection, body, (data) => {
+      res.json(data);
+    });
+  }
+);
+
+//Se manda llamar antes de iniciar una partida
+router.post(
+  "/borrarAtaques",
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.json({ success: false, err: JSON.stringify(errors) });
+      return;
+    }
+    console.log("La info: ",req.body);
+    let body = req.body;
+    info.borrarAtaques(connection, body, (data) => {
+      res.json(data);
+    });
+  }
+);
+
 //Checa la información del usuario
 router.get("/jugador/:correo", [], (req, res) => {
   info.getInfoUsuario(connection,req, (data) => {
