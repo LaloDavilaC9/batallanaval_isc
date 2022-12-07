@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_poner_barcos.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,8 +35,15 @@ class juegoPvA : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego_pv)
 
-        inicializarCeldas()
+        barcoE2 = arrayOf<Point>(Point(0,0),Point(0,0))
+        barcoE3 = arrayOf<Point>(Point(0,0),Point(0,0),Point(0,0))
+        barcoE4= arrayOf<Point>(Point(0,0),Point(0,0),Point(0,0),Point(0,0))
+        barcoE5= arrayOf<Point>(Point(0,0),Point(0,0),Point(0,0),Point(0,0),Point(0,0))
+
+            inicializarCeldas()
         celdasOcupadas = intent.getSerializableExtra("Celdas") as Array<BooleanArray>
+
+
         marcadorEnemigo = findViewById(R.id.marcadorEnemigo)
         colorearMisCeldas()
         generarBarcoEnemigo()
@@ -410,6 +418,7 @@ class juegoPvA : AppCompatActivity() {
     }
 
     fun generarBarcoEnemigo(){
+
         var casillax:Int
         var casillay:Int
         var orientacion:Int
@@ -423,9 +432,10 @@ class juegoPvA : AppCompatActivity() {
 
         //Barco de 2 casilla
 
-       casillax=rand(1,8)
+        casillax=rand(1,8)
         casillay=rand(1,8)
         orientacion=rand(1,2)
+
         while (true) {
             if (orientacion == 1) {
                 if (barcoE1.x == casillax || barcoE1.x == (casillax + 1)) {
@@ -458,7 +468,7 @@ class juegoPvA : AppCompatActivity() {
                     casillax = rand(1, 8)
                     casillay = rand(1, 8)
                 } else
-                    barcoE3 = arrayOf<Point>(Point(casillax.toInt(),casillay.toInt()),Point((casillax + 1).toInt(),casillay.toInt()))
+                    barcoE3 = arrayOf<Point>(Point(casillax.toInt(),casillay.toInt()),Point((casillax + 1).toInt(),casillay.toInt()),Point((casillax + 2).toInt(),casillay.toInt()) )
                 break
             }
             else{
@@ -467,10 +477,12 @@ class juegoPvA : AppCompatActivity() {
                     casillax = rand(1, 8)
                     casillay = rand(1, 8)
                 } else
-                    barcoE3 = arrayOf<Point>(Point(casillax.toInt(),casillay.toInt()),Point((casillax + 1).toInt(),casillay.toInt()))
+                    barcoE3 = arrayOf<Point>(Point(casillax.toInt(),casillay.toInt()),Point((casillax + 1).toInt(),casillay.toInt()),Point((casillax + 2).toInt(),casillay.toInt()))
                 break
             }
         }
+        println("LLEGA")
+
         //Barco de 4 casilla
         casillax=rand(1,6)
         casillay=rand(1,6)

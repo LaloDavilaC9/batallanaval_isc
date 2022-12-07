@@ -1,5 +1,6 @@
 package com.example.batalla_naval_proyecto
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PointF
 import androidx.appcompat.app.AppCompatActivity
@@ -19,13 +20,14 @@ import org.json.JSONObject
 
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.w3c.dom.Text
 import retrofit2.Response
 import retrofit2.Retrofit
 
 class Ingame_boards : AppCompatActivity() {
     private val met = Metodos()
 
-
+    private lateinit var turnoLabel : TextView
     private var misCeldas = arrayOf<Array<TextView>>()
     private var celdasEnemigas = arrayOf<Array<TextView>>()
     private var celdasOcupadas: Array<BooleanArray> = Array(10){BooleanArray(10)}
@@ -45,6 +47,7 @@ class Ingame_boards : AppCompatActivity() {
     private var correoHost : String = ""
     private var correoInvitado : String = ""
 
+    var ataquesHaciaMi : Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ingame_boards)
@@ -57,10 +60,16 @@ class Ingame_boards : AppCompatActivity() {
         celdasOcupadas = intent.getSerializableExtra("misCeldas") as Array<BooleanArray>
         marcadorEnemigo = findViewById(R.id.marcadorEnemigo)
         colorearMisCeldas()
-
+        turnoLabel = findViewById(R.id.txtTurno) as TextView
         if(turnoJugador == 2)
             esperarAtaque()
 
+        if(turnoJugador == turnoJugada){
+            turnoLabel.text = "ES TU TURNO"
+        }
+        else{
+            turnoLabel.text = "TURNO DEL RIVAL"
+        }
         //Recibimos tablero enemigo
         // recibirTablero()
         // esMiTurno = false;
@@ -77,7 +86,12 @@ class Ingame_boards : AppCompatActivity() {
 
 
     fun atacarCelda(coord: PointF) {
-
+        if(turnoJugador == turnoJugada){
+            turnoLabel.text = "ES TU TURNO"
+        }
+        else{
+            turnoLabel.text = "TURNO DEL RIVAL"
+        }
         //SIGNIFICA QUE ES TU TURNO
         if (this.turnoJugada == this.turnoJugador) {
             val jsonObject = JSONObject()
@@ -147,13 +161,20 @@ class Ingame_boards : AppCompatActivity() {
                                 Toast.makeText(applicationContext, "¡Has fallado!", Toast.LENGTH_SHORT).show()
                             }
                             //Sin importar si se acierta o no, se deshabilita la celda presionada
+                            if(aciertos!=16){
+                                //Le toca al otro jugador
+                                cambiarTurno()
+
+                                //Como ya recibimos información de si el ataque nuestro fue certero o no, entonces ahora esperamos el ataque del enemigo
+                                esperarAtaque()
+
+                            }else{
+                                //YA GANÓ
+                                val intent = Intent(applicationContext,Ganador::class.java)
+                                startActivity(intent)
+                            }
                             celdasEnemigas[coord.x.toInt()][coord.y.toInt()].isClickable = false
 
-                            //Le toca al otro jugador
-                            cambiarTurno()
-
-                            //Como ya recibimos información de si el ataque nuestro fue certero o no, entonces ahora esperamos el ataque del enemigo
-                            esperarAtaque()
                             }
                         }
 
@@ -168,14 +189,23 @@ class Ingame_boards : AppCompatActivity() {
     }
 
     fun cambiarTurno(){
-        if(turnoJugada == 1)
+        if(turnoJugada == 1){
             turnoJugada = 2
-        else
-            turnoJugada = 1
+        }
+        else{
+                turnoJugada = 1
+        }
+
         numeroJugada++
     }
 
     fun esperarAtaque() {
+        if(turnoJugador == turnoJugada){
+            turnoLabel.text = "ES TU TURNO"
+        }
+        else{
+            turnoLabel.text = "TURNO DEL RIVAL"
+        }
         var turnoNuevo = 0
         var pos_x: Int = -1
         var pos_y: Int = -1
@@ -206,6 +236,7 @@ class Ingame_boards : AppCompatActivity() {
 
                 if(ataque == 1){
                     Toast.makeText(applicationContext, "¡Te han atacado!" , Toast.LENGTH_SHORT).show()
+                    ataquesHaciaMi++
                     misCeldas[pos_x][pos_y].setBackgroundColor(Color.RED)
                 }else{
                     Toast.makeText(applicationContext, "¡El enemigo ha fallado!" , Toast.LENGTH_SHORT).show()
@@ -247,6 +278,10 @@ class Ingame_boards : AppCompatActivity() {
                         }
                     }
 
+                    if(ataquesHaciaMi==16){
+                        val intent = Intent(applicationContext,Perdedor::class.java)
+                        startActivity(intent)
+                    }
                     //Le toca a este jugador
                     cambiarTurno()
                 }

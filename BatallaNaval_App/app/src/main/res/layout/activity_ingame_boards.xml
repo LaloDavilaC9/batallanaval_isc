@@ -929,6 +929,14 @@
             android:text="Mis Barcos"
             android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/txtTurno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="Turno:"
+            android:textSize="16sp" />
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
