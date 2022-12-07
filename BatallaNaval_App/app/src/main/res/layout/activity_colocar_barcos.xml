@@ -37,7 +37,7 @@
                 android:id="@+id/barco3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Barco de 3 Casillas" />
+                android:text="Barco de 2 Casillas" />
 
             <RadioButton
                 android:id="@+id/barco4"

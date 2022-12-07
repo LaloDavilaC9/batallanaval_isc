@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import kotlinx.coroutines.CoroutineScope
@@ -53,10 +54,13 @@ class EnlazarJugadores : AppCompatActivity() {
 
             while (bandera == 0 && controlEscuchar) {
                 println("ESPERANDO INVITACIÓN DE ALGUIEN")
+                var res = ""
                 val call: Response<invitacionResponse> = met.getRetrofit().create(APIService::class.java).preguntarInvitacion("/invitaciones/${txtCorreoHost}")
                 val invitacion = call.body() as invitacionResponse
                 if(invitacion.array.size>0){
                     println("ME ESTÁ INVITANDO A JUGAR ${invitacion.array[0].invita}")
+
+
                     //Invitación se acepta por default
                     val jsonObject = JSONObject()
                     jsonObject.put("invitado", txtCorreoHost)

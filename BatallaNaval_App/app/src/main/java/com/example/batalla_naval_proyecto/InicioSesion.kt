@@ -24,7 +24,6 @@ class InicioSesion : AppCompatActivity() {
         btnIniciar = findViewById(R.id.btnIniciar)
         txtCorreo = findViewById(R.id.correo)
         txtContrasena = findViewById(R.id.contrasena)
-
         btnIniciar.setOnClickListener {
             verificarSesion()
         }
